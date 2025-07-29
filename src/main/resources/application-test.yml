@@ -1,0 +1,63 @@
+# Test Environment Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/iam_test_db
+    username: iam_test_user
+    password: test_password
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ""
+      database: 1  # Use different database for tests
+
+# JWT Configuration for Testing
+jwt:
+  secret: test-jwt-secret-key-for-testing-environment-only
+  expiration-ms: 60000  # 1 minute for faster testing
+  refresh-expiration-ms: 300000  # 5 minutes for testing
+
+# Auth Configuration for Testing
+auth:
+  max-login-attempts: 2  # Low for testing lockout scenarios
+  account-lock-duration-minutes: 1  # Very short for testing
+  password-reset-token-expiry-hours: 1
+  email-verification-token-expiry-hours: 1
+
+# Logging Configuration for Testing
+logging:
+  level:
+    com.iam.auth: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.data.redis: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.test: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Management endpoints for testing
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+# Test-specific configurations
+test:
+  cleanup:
+    enabled: true
+  mock:
+    enabled: true
