@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -25,6 +26,7 @@ public class RedisConfig {
     private String redisPassword;
 
     @Bean
+    @Primary  // ADD THIS
     public ReactiveRedisConnectionFactory reactiveRedisConnectionFactory() {
         log.info("Configuring Reactive Redis connection to {}:{}", redisHost, redisPort);
 
@@ -40,6 +42,7 @@ public class RedisConfig {
     }
 
     @Bean
+    @Primary  // ADD THIS
     public ReactiveRedisTemplate<String, String> reactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
         StringRedisSerializer stringSerializer = new StringRedisSerializer();
 
