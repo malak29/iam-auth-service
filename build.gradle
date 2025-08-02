@@ -16,33 +16,33 @@ dependencies {
     // Common utilities
     implementation project(':iam-common-utilities')
 
-    // Spring Boot
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Reactive Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // Redis for session/token management
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // Reactive Redis for session/token management
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 
-    // OAuth2 for social login
+    // R2DBC PostgreSQL driver
+    implementation 'org.postgresql:r2dbc-postgresql'
+
+    // OAuth2 for social login (reactive version)
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
-    // Email support
+    // Email support (still blocking - we'll handle this reactively)
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-    // Database
-    runtimeOnly 'org.postgresql:postgresql'
-
-    // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.32'
-    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    // Lombok (updated version)
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test:3.6.12'
     testImplementation 'org.springframework.security:spring-security-test'
-    testCompileOnly 'org.projectlombok:lombok:1.18.32'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
 }
 
 test {

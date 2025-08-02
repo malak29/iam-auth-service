@@ -1,18 +1,8 @@
-# Development Environment Configuration
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/iam_db
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/iam_db
     username: iam_malak
     password: Malak123
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
-        use_sql_comments: true
 
   data:
     redis:
@@ -37,13 +27,10 @@ auth:
 logging:
   level:
     com.iam.auth: DEBUG
-    org.springframework.security: DEBUG
+    io.r2dbc.postgresql.QUERY: DEBUG  # R2DBC SQL logging
     org.springframework.data.redis: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
   file:
     name: logs/iam-auth-service-dev.log
 
