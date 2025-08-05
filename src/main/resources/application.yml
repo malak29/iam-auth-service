@@ -18,6 +18,59 @@ spring:
           max-active: 8
           max-idle: 8
           min-idle: 0
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:your-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:your-google-client-secret}
+            scope:
+              - openid
+              - email
+              - profile
+            redirect-uri: ${OAUTH2_REDIRECT_URI:http://localhost:8082}/login/oauth2/code/google
+            authorization-grant-type: authorization_code
+            client-name: Google
+
+          github:
+            client-id: ${GITHUB_CLIENT_ID:your-github-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:your-github-client-secret}
+            scope:
+              - user:email
+              - read:user
+            redirect-uri: ${OAUTH2_REDIRECT_URI:http://localhost:8082}/login/oauth2/code/github
+            authorization-grant-type: authorization_code
+            client-name: GitHub
+
+          facebook:
+            client-id: ${FACEBOOK_CLIENT_ID:your-facebook-client-id}
+            client-secret: ${FACEBOOK_CLIENT_SECRET:your-facebook-client-secret}
+            scope:
+              - email
+              - public_profile
+            redirect-uri: ${OAUTH2_REDIRECT_URI:http://localhost:8082}/login/oauth2/code/facebook
+            authorization-grant-type: authorization_code
+            client-name: Facebook
+
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v2/userinfo
+            user-name-attribute: sub
+
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+            user-name-attribute: id
+
+          facebook:
+            authorization-uri: https://www.facebook.com/v18.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v18.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email
+            user-name-attribute: id
 
 # JWT Configuration
 jwt:
