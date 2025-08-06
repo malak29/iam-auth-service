@@ -1,5 +1,6 @@
-ackage com.iam.auth.service;
+package com.iam.auth.service;
 
+import com.iam.auth.security.CustomOAuth2User;
 import com.iam.common.model.User;
 import com.iam.common.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ import java.util.UUID;
 public class OAuth2UserService extends DefaultReactiveOAuth2UserService {
 
     private final UserRepository userRepository;
-    private final UserService userService;
 
     @Override
     public Mono<OAuth2User> loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
